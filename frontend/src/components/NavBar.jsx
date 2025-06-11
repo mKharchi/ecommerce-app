@@ -6,8 +6,15 @@ const NavBar = () => {
 
     const [visible, setVisible] = useState(false)
 
-    const { setShowSearch, count } = useContext(ShopContext)
+    const { setShowSearch, count, setCount, navigate, setToken, setCartItems, token } = useContext(ShopContext)
+    const logout = () => {
+        console.log(token);
 
+        localStorage.removeItem('token')
+        setToken('')
+        setCartItems({})
+        navigate('/login')
+    }
 
     return (
         <div className="flex items-center justify-between py-5 font-medium" >
@@ -44,16 +51,17 @@ const NavBar = () => {
                 <img onClick={() => setShowSearch(true)} src={assets.search_icon} alt="" className='w-5 cursor-pointer' />
 
                 <div className='group relative'>
-                    <Link to={"/login"}> <img src={assets.profile_icon} alt="" className='w-5 cursor-pointer' />
-                    </Link><div className='group-hover:block  hidden absolute dropdown-menu transition-all duration-200 right-0 pt-4'>
+                    <img onClick={()=> token ? null : navigate('/login')} src={assets.profile_icon} alt="" className='w-5 cursor-pointer' />
+                    {token && 
+                    <div className='group-hover:block  hidden absolute dropdown-menu transition-all duration-200 right-0 pt-4'>
 
                         <div className='flex flex-col gap-2 w-36 py-3 px-5 bg-slate-100 text-gray-700 rounded'>
 
                             <p className=' cursor-pointer transform duration-200 hover:text-black '>My profile</p>
-                            <p className=' cursor-pointer transform duration-200 hover:text-black '>Orders</p>
-                            <p className=' cursor-pointer transform duration-200 hover:text-black '>Logout</p>
+                            <p onClick={()=>navigate('/orders')} className=' cursor-pointer transform duration-200 hover:text-black '>Orders</p>
+                            <p className=' cursor-pointer transform duration-200 hover:text-black ' onClick={logout} >Logout</p>
                         </div>
-                    </div>
+                    </div>}
                 </div>
 
                 <Link

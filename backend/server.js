@@ -5,6 +5,8 @@ import connectDb from "./config/mongodb.js"
 import connectCloudinary from "./config/cloudnary.js"
 import userRouter from "./routes/userRoutes.js"
 import productRouter from "./routes/productRoutes.js"
+import cartRouter from "./routes/cartRoutes.js"
+import orderRouter from "./routes/orderRoutes.js"
 
 
 // app config
@@ -28,6 +30,8 @@ app.get('/', (req, res) => {
 })
 app.use('/api/user', userRouter)
 app.use('/api/product', productRouter)
+app.use('/api/cart', cartRouter)
+app.use('/api/order', orderRouter)
 
 
 

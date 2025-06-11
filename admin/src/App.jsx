@@ -12,7 +12,7 @@ import { ToastContainer } from 'react-toastify';
 
 
 export const backendUrl = import.meta.env.VITE_API_URL
-export const currency = <import className="meta env CURRENCY"></import>
+export const currency = import.meta.env.VITE_CURRENCY
 
 const App = () => {
 
